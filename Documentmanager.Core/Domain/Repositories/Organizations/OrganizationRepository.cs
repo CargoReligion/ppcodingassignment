@@ -24,10 +24,7 @@ namespace Documentmanager.Core.Domain.Repositories.Organizations
         public async Task<int> Create(Organization organization)
         {
             using var connection = new NpgsqlConnection(_connectionString);
-            var sql = @"
-                INSERT INTO Organization (Id, Name)
-                VALUES (@Id, @Name)
-                RETURNING Id";
+            var sql = "INSERT INTO Organization (name, created_by, date_created, date_modified, modified_by) VALUES (@Name, @CreatedBy, @DateCreated, @DateModified, @ModifiedBy) RETURNING Id";
             return await connection.ExecuteScalarAsync<int>(sql, organization);
         }
 
@@ -44,8 +41,8 @@ namespace Documentmanager.Core.Domain.Repositories.Organizations
         public async Task<Organization> GetByName(string name)
         {
             using var connection = new NpgsqlConnection(_connectionString);
-            var sql = "SELECT * FROM Organization WHERE Name = @name";
-            return await connection.QuerySingleAsync<Organization>(sql, name);
+            var sql = "SELECT * FROM Organization WHERE Name = @Name";
+            return await connection.QuerySingleOrDefaultAsync<Organization>(sql, new {Name = name});
         }
     }
 }

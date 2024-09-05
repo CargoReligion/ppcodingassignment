@@ -2,6 +2,7 @@
 {
     public class Organization
     {
+        private Organization(){}
         public Organization(string name, int userId)
         {
             Name = name;
