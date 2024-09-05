@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Documentmanager.Core.Domain.Repositories.Common;
 
 namespace Documentmanager.Core.Domain.Repositories.Organizations
 {
@@ -17,7 +18,7 @@ namespace Documentmanager.Core.Domain.Repositories.Organizations
 
         public OrganizationRepository(IConfiguration config)
         {
-            _connectionString = config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            _connectionString = ConnectionInfo.BuildConnectionString(config);
         }
 
         public async Task<int> Create(Organization organization)

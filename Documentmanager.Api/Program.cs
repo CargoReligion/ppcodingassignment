@@ -3,6 +3,7 @@ using Autofac.Extensions.DependencyInjection;
 using Documentmanager.Core.Domain.Models.Organizations;
 using Documentmanager.Core.Domain.Repositories.Interfaces;
 using Documentmanager.Core.Domain.Repositories.Organizations;
+using Documentmanager.Core.Domain.Services.Organizations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,8 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     // Register your services here
     containerBuilder.RegisterType<OrganizationRepository>().As<IRepository<Organization>>().InstancePerLifetimeScope();
     containerBuilder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>().InstancePerLifetimeScope();
+    containerBuilder.RegisterType<OrganizationService>().InstancePerLifetimeScope();
+
 
     // You can also register entire assemblies
     // containerBuilder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
