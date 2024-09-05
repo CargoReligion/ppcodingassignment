@@ -1,0 +1,36 @@
+version: "3.1"
+
+services:
+  server:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      ports:
+        - 8080:8080
+      depends_on:
+        - db
+        - migrations
+      environment:
+        - HOST=db
+        - DB_PORT=5432
+        - DB=panther
+        - ENLIST=true
+        - DB_USERNAME=postgres
+        - DB_PASSWORD=admin
+  db:
+    image: postgres:14.4
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=panther
+    volumes:
+      - data:/var/lib/postgresql/data
+  migrations:
+    image:  flyway/flyway:9.9.0
+    command:  -url=jdbc:postgresql://db/panther -locations=filesystem:/dbscripts -schemas=public -user=postgres -password=admin -connectRetries=60 migrate
+    volumes:
+      - .:/dbscripts
+    depends_on:
+      - db

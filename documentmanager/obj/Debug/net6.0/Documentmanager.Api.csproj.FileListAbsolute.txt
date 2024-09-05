@@ -27,3 +27,13 @@ C:\Users\Mahesh\source\repos\documentmanager\documentmanager\obj\Debug\net6.0\re
 C:\Users\Mahesh\source\repos\documentmanager\documentmanager\obj\Debug\net6.0\Documentmanager.Api.pdb
 C:\Users\Mahesh\source\repos\documentmanager\documentmanager\obj\Debug\net6.0\Documentmanager.Api.genruntimeconfig.cache
 C:\Users\Mahesh\source\repos\documentmanager\documentmanager\obj\Debug\net6.0\ref\Documentmanager.Api.dll
+C:\Users\Mahesh\source\repos\documentmanager\documentmanager\bin\Debug\net6.0\Dapper.dll
+C:\Users\Mahesh\source\repos\documentmanager\documentmanager\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Mahesh\source\repos\documentmanager\documentmanager\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Mahesh\source\repos\documentmanager\documentmanager\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Mahesh\source\repos\documentmanager\documentmanager\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Mahesh\source\repos\documentmanager\documentmanager\bin\Debug\net6.0\Npgsql.dll
+C:\Users\Mahesh\source\repos\documentmanager\documentmanager\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Mahesh\source\repos\documentmanager\documentmanager\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Mahesh\source\repos\documentmanager\documentmanager\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\Mahesh\source\repos\documentmanager\documentmanager\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
