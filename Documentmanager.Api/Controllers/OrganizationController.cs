@@ -32,7 +32,7 @@ namespace Documentmanager.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _service.Create(request.Organization, userId);
+            var result = await _service.CreateOrganization(request.Organization, userId);
 
             return Ok(result);
         }

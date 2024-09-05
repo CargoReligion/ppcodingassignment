@@ -18,7 +18,7 @@ namespace Documentmanager.Core.Domain.Services.Organizations
             _repository = repository;
         }
 
-        public async Task<int> Create(OrganizationDto dto, int userId)
+        public async Task<int> CreateOrganization(OrganizationDto dto, int userId)
         {
             var existingOrganization = await _repository.GetByName(dto.Name);
             //TODO: Check if already exists
