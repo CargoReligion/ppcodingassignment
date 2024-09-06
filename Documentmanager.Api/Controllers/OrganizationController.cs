@@ -20,7 +20,7 @@ namespace Documentmanager.Api.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ActionResult<GetOrganizationDto>> Get(int id)
         {
             if (!ModelState.IsValid)
@@ -31,8 +31,8 @@ namespace Documentmanager.Api.Controllers
             return result.IsSuccess ? OkFromResult(result) : BadRequestFromResult(result);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<GetOrganizationDto>>> GetAll(int id)
+        [HttpGet("getall")]
+        public async Task<ActionResult<IEnumerable<GetOrganizationDto>>> GetAll()
         {
             if (!ModelState.IsValid)
             {

@@ -16,7 +16,7 @@ namespace Documentmanager.Core.Domain.Models.Common
         }
 
         public T SuccessData { get; set; }
-        public IEnumerable<string> Errors { get; set; }
+        public IEnumerable<string> Errors { get; set; } = new List<string>();
         public bool IsSuccess => !Errors.Any();
 
         public void AddError(string error)

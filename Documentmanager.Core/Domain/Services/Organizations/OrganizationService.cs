@@ -51,6 +51,7 @@ namespace Documentmanager.Core.Domain.Services.Organizations
             var existingOrganization = await _repository.GetByName(dto.Name);
             if (existingOrganization != null)
             {
+                Console.WriteLine("OOPS!");
                 result.AddError($"Organization with name {dto.Name} already exists.");
             }
             else

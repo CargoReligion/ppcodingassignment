@@ -5,13 +5,14 @@ using Documentmanager.Core.Domain.Models.Organizations;
 using Documentmanager.Core.Domain.Repositories.Interfaces;
 using Documentmanager.Core.Domain.Repositories.Organizations;
 using Documentmanager.Core.Domain.Services.Organizations;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddAutoMapper(typeof(Profile));
+builder.Services.AddAutoMapper(typeof(Organization));
 
 // Use Autofac as the ServiceProvider
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());

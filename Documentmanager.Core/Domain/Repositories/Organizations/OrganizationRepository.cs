@@ -37,9 +37,18 @@ namespace Documentmanager.Core.Domain.Repositories.Organizations
 
         public async Task<int> Create(Organization organization)
         {
-            using var connection = new NpgsqlConnection(_connectionString);
+            try
+            {
+                using var connection = new NpgsqlConnection(_connectionString);
             var sql = "INSERT INTO Organization (name, created_by, date_created, date_modified, modified_by) VALUES (@Name, @CreatedBy, @DateCreated, @DateModified, @ModifiedBy) RETURNING Id";
             return await connection.ExecuteScalarAsync<int>(sql, organization);
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw;
+            }
+            
         }
 
         public async Task Delete(Organization organization)
