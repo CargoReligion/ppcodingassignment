@@ -59,5 +59,41 @@ namespace Documentmanager.Api.Controllers
 
             return result.IsSuccess ? OkFromResult(result) : BadRequestFromResult(result);
         }
+
+        [HttpPut]
+        public async Task<ActionResult<int>> UpdateOrganization([FromBody] UpdateOrganizationDto request, [FromHeader(Name = "X-User-Id")] int userId)
+        {
+            if (userId == default(int))
+            {
+                return BadRequest("UserId missing from header.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _service.UpdateOrganization(request, userId);
+
+            return result.IsSuccess ? OkFromResult(result) : BadRequestFromResult(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<int>> DeleteOrganization(int id, [FromHeader(Name = "X-User-Id")] int userId)
+        {
+            if (userId == default(int))
+            {
+                return BadRequest("UserId missing from header.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _service.DeleteOrganization(id, userId);
+
+            return result.IsSuccess ? OkFromResult(result) : BadRequestFromResult(result);
+        }
     }
 }

@@ -51,7 +51,6 @@ namespace Documentmanager.Core.Domain.Services.Organizations
             var existingOrganization = await _repository.GetByName(dto.Name);
             if (existingOrganization != null)
             {
-                Console.WriteLine("OOPS!");
                 result.AddError($"Organization with name {dto.Name} already exists.");
             }
             else
@@ -84,6 +83,20 @@ namespace Documentmanager.Core.Domain.Services.Organizations
                 var updatedId = await _repository.Update(existingOrganization);
                 result.AddSuccessData(updatedId);
             }
+            return result;
+        }
+
+        public async Task<Result<int>> DeleteOrganization(int id, int userId)
+        {
+            var result = new Result<int>();
+            var existingOrganization = await _repository.GetById(id);
+            if (existingOrganization == null)
+            {
+                result.AddError($"Organization with id {id} not found.");
+                return result;
+            }
+            await _repository.Delete(existingOrganization);
+            result.AddSuccessData(existingOrganization.Id);
             return result;
         }
     }
