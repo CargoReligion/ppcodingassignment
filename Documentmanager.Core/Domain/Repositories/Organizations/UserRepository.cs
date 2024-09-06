@@ -25,42 +25,42 @@ namespace Documentmanager.Core.Domain.Repositories.Organizations
         public async Task<IEnumerable<User>> GetAll()
         {
             using var connection = new NpgsqlConnection(_connectionString);
-            var sql = "SELECT * FROM User";
+            var sql = "SELECT * FROM dsuser";
             return await connection.QueryAsync<User>(sql);
         }
 
         public async Task<User?> GetById(int id)
         {
             using var connection = new NpgsqlConnection(_connectionString);
-            var sql = "SELECT * FROM User WHERE id = @Id";
+            var sql = "SELECT * FROM dsuser WHERE id = @Id";
             return await connection.QuerySingleOrDefaultAsync<User>(sql, new { Id = id });
         }
 
         public async Task<int> Create(User user)
         {
             using var connection = new NpgsqlConnection(_connectionString);
-            var sql = "INSERT INTO User (email, created_by, date_created, date_modified, modified_by) VALUES (@Email, @CreatedBy, @DateCreated, @DateModified, @ModifiedBy) RETURNING Id";
+            var sql = "INSERT INTO dsuser (email, created_by, date_created, date_modified, modified_by) VALUES (@Email, @CreatedBy, @DateCreated, @DateModified, @ModifiedBy) RETURNING Id";
             return await connection.ExecuteScalarAsync<int>(sql, user);
         }
 
         public async Task Delete(User user)
         {
             using var connection = new NpgsqlConnection(_connectionString);
-            var sql = "DELETE FROM User WHERE id = @Id";
+            var sql = "DELETE FROM dsuser WHERE id = @Id";
             await connection.ExecuteAsync(sql, new {Id = user.Id});
         }
 
         public async Task<int> Update(User user)
         {
             using var connection = new NpgsqlConnection(_connectionString);
-            var sql = "UPDATE User SET email = @Email, created_by = @CreatedBy, date_created = @DateCreated, date_modified = @DateModified, modified_by = @ModifiedBy WHERE id = @Id RETURNING Id";
+            var sql = "UPDATE dsuser SET email = @Email, created_by = @CreatedBy, date_created = @DateCreated, date_modified = @DateModified, modified_by = @ModifiedBy WHERE id = @Id RETURNING Id";
             return await connection.ExecuteScalarAsync<int>(sql, user);
         }
 
         public async Task<User?> GetByEmail(string email)
         {
             using var connection = new NpgsqlConnection(_connectionString);
-            var sql = "SELECT * FROM User WHERE Email = @Email";
+            var sql = "SELECT * FROM dsuser WHERE Email = @Email";
             return await connection.QuerySingleOrDefaultAsync<User>(sql, new {Email = email});
         }
     }

@@ -1,4 +1,4 @@
-CREATE TABLE public.user(
+CREATE TABLE public.dsuser(
     id SERIAL PRIMARY KEY,
     email text NOT NULL,
     created_by integer NOT NULL,
