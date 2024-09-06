@@ -81,7 +81,7 @@ namespace Documentmanager.Core.Domain.Services.Users
             return result;
         }
 
-        public async Task<Result<int>> DeleteOrganization(int id, int userId)
+        public async Task<Result<int>> DeleteUser(int id)
         {
             var result = new Result<int>();
             var existingOrganization = await _repository.GetById(id);

@@ -1,7 +1,9 @@
 using Documentmanager.Api.Controllers.Common;
 using Documentmanager.Core.Domain.Dtos;
 using Documentmanager.Core.Domain.Dtos.Organizations;
+using Documentmanager.Core.Domain.Dtos.Users;
 using Documentmanager.Core.Domain.Services.Organizations;
+using Documentmanager.Core.Domain.Services.Users;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -9,20 +11,20 @@ namespace Documentmanager.Api.Controllers
 {
     [ApiController]
     [Route("v1/admin/[controller]")]
-    public class OrganizationController : CommonController
+    public class UserController : CommonController
     {
-        private readonly OrganizationService _service;
+        private readonly UserService _service;
 
-        private readonly ILogger<OrganizationController> _logger;
+        private readonly ILogger<UserController> _logger;
 
-        public OrganizationController(OrganizationService service, ILogger<OrganizationController> logger)
+        public UserController(UserService service, ILogger<UserController> logger)
         {
             _service = service;
             _logger = logger;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetOrganizationDto>> Get(int id)
+        public async Task<ActionResult<GetUserDto>> Get(int id)
         {
             if (!ModelState.IsValid)
             {
@@ -33,7 +35,7 @@ namespace Documentmanager.Api.Controllers
         }
 
         [HttpGet("getall")]
-        public async Task<ActionResult<IEnumerable<GetOrganizationDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<GetUserDto>>> GetAll()
         {
             if (!ModelState.IsValid)
             {
@@ -44,7 +46,7 @@ namespace Documentmanager.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> CreateOrganization([FromBody] CreateOrganizationDto request, [FromHeader(Name = "X-User-Id")] int userId)
+        public async Task<ActionResult<int>> CreateUser([FromBody] CreateUserDto request, [FromHeader(Name = "X-User-Id")] int userId)
         {
             if (userId == default(int))
             {
@@ -56,13 +58,13 @@ namespace Documentmanager.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _service.CreateOrganization(request, userId);
+            var result = await _service.CreateUser(request, userId);
 
             return result.IsSuccess ? OkFromResult(result) : BadRequestFromResult(result);
         }
 
         [HttpPut]
-        public async Task<ActionResult<int>> UpdateOrganization([FromBody] UpdateOrganizationDto request, [FromHeader(Name = "X-User-Id")] int userId)
+        public async Task<ActionResult<int>> UpdateUser([FromBody] UpdateUserDto request, [FromHeader(Name = "X-User-Id")] int userId)
         {
             if (userId == default(int))
             {
@@ -74,13 +76,13 @@ namespace Documentmanager.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _service.UpdateOrganization(request, userId);
+            var result = await _service.UpdateUser(request, userId);
 
             return result.IsSuccess ? OkFromResult(result) : BadRequestFromResult(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<int>> DeleteOrganization(int id, [FromHeader(Name = "X-User-Id")] int userId)
+        public async Task<ActionResult<int>> DeleteUser(int id, [FromHeader(Name = "X-User-Id")] int userId)
         {
             if (userId == default(int))
             {
@@ -92,7 +94,7 @@ namespace Documentmanager.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _service.DeleteOrganization(id);
+            var result = await _service.DeleteUser(id);
 
             return result.IsSuccess ? OkFromResult(result) : BadRequestFromResult(result);
         }
