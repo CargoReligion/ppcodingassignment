@@ -9,6 +9,6 @@ namespace Documentmanager.Core.Domain.Repositories.Interfaces
 {
     public interface IOrganizationRepository : IRepository<Organization>
     {
-        public Task<Organization> GetByName(string name);
+        public Task<Organization?> GetByName(string name);
     }
 }

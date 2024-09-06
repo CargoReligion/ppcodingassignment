@@ -21,6 +21,20 @@ namespace Documentmanager.Core.Domain.Repositories.Organizations
             _connectionString = ConnectionInfo.BuildConnectionString(config);
         }
 
+        public async Task<IEnumerable<Organization>> GetAll()
+        {
+            using var connection = new NpgsqlConnection(_connectionString);
+            var sql = "SELECT * FROM Organization";
+            return await connection.QueryAsync<Organization>(sql);
+        }
+
+        public async Task<Organization?> GetById(int id)
+        {
+            using var connection = new NpgsqlConnection(_connectionString);
+            var sql = "SELECT * FROM Organization WHERE id = @Id";
+            return await connection.QuerySingleOrDefaultAsync<Organization>(sql, new { Id = id });
+        }
+
         public async Task<int> Create(Organization organization)
         {
             using var connection = new NpgsqlConnection(_connectionString);
@@ -28,17 +42,21 @@ namespace Documentmanager.Core.Domain.Repositories.Organizations
             return await connection.ExecuteScalarAsync<int>(sql, organization);
         }
 
-        public Task Delete(Organization t)
+        public async Task Delete(Organization organization)
         {
-            throw new NotImplementedException();
+            using var connection = new NpgsqlConnection(_connectionString);
+            var sql = "DELETE FROM Organization WHERE id = @Id";
+            await connection.ExecuteAsync(sql, new {Id = organization.Id});
         }
 
-        public Task<int> Update(Organization t)
+        public async Task<int> Update(Organization organization)
         {
-            throw new NotImplementedException();
+            using var connection = new NpgsqlConnection(_connectionString);
+            var sql = "UPDATE Organization SET name = @Name, created_by = @CreatedBy, date_created = @DateCreated, date_modified = @DateModified, modified_by = @ModifiedBy WHERE id = @Id RETURNING Id";
+            return await connection.ExecuteScalarAsync<int>(sql, organization);
         }
 
-        public async Task<Organization> GetByName(string name)
+        public async Task<Organization?> GetByName(string name)
         {
             using var connection = new NpgsqlConnection(_connectionString);
             var sql = "SELECT * FROM Organization WHERE Name = @Name";

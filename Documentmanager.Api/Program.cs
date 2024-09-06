@@ -1,5 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using Documentmanager.Core.Domain.Models.Organizations;
 using Documentmanager.Core.Domain.Repositories.Interfaces;
 using Documentmanager.Core.Domain.Repositories.Organizations;
@@ -9,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAutoMapper(typeof(Profile));
 
 // Use Autofac as the ServiceProvider
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
