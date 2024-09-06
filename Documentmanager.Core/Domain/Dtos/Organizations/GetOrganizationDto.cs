@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Documentmanager.Core.Domain.Dtos
+namespace Documentmanager.Core.Domain.Dtos.Organizations
 {
-    public class CreateOrganizationDto
+    public class GetOrganizationDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

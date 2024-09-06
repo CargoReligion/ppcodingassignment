@@ -1,5 +1,6 @@
 using Documentmanager.Api.Controllers.Common;
 using Documentmanager.Core.Domain.Dtos;
+using Documentmanager.Core.Domain.Dtos.Organizations;
 using Documentmanager.Core.Domain.Services.Organizations;
 using Microsoft.AspNetCore.Mvc;
 

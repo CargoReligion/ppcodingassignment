@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Documentmanager.Core.Domain.Dtos;
+using Documentmanager.Core.Domain.Dtos.Organizations;
 using Documentmanager.Core.Domain.Models.Common;
 using Documentmanager.Core.Domain.Models.Organizations;
 using Documentmanager.Core.Domain.Repositories.Interfaces;

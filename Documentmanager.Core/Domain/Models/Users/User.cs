@@ -1,15 +1,15 @@
 ﻿using Documentmanager.Core.Domain.Dtos;
-using Documentmanager.Core.Domain.Dtos.Organizations;
+using Documentmanager.Core.Domain.Dtos.Users;
 
-namespace Documentmanager.Core.Domain.Models.Organizations
+namespace Documentmanager.Core.Domain.Models.Users
 {
-    public class Organization
+    public class User
     {
         //Parameterless constructor is recommended for dapper
-        private Organization(){}
-        public Organization(string name, int userId)
+        private User(){}
+        public User(string email, int userId)
         {
-            Name = name;
+            Email = email;
             CreatedBy = userId;
             ModifiedBy = userId;
             DateCreated = DateTime.UtcNow;
@@ -17,15 +17,15 @@ namespace Documentmanager.Core.Domain.Models.Organizations
         }
 
         public int Id { get; private set; }
-        public string Name { get; private set; }
+        public string Email { get; private set; }
         public int CreatedBy { get; private set; }
         public int ModifiedBy { get; private set; }
         public DateTime DateCreated { get; private set; }
         public DateTime DateModified { get; private set; }  
 
-        public void UpdateName(UpdateOrganizationDto dto)
+        public void UpdateEmail(UpdateUserDto dto)
         {
-            Name=dto.Name;
+            Email=dto.Email;
         }
     }
 }

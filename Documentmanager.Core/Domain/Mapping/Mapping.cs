@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using Documentmanager.Core.Domain.Dtos;
+using Documentmanager.Core.Domain.Dtos.Organizations;
+using Documentmanager.Core.Domain.Dtos.Users;
 using Documentmanager.Core.Domain.Models.Organizations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Documentmanager.Core.Domain.Models.Users;
 
 namespace Documentmanager.Core.Domain.Mapping
 {
@@ -14,6 +11,7 @@ namespace Documentmanager.Core.Domain.Mapping
         public Mapping()
         {
             CreateMap<Organization, GetOrganizationDto>();
+            CreateMap<User, GetUserDto>();
         }
     }
 }

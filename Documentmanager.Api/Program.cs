@@ -1,18 +1,18 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using AutoMapper;
 using Documentmanager.Core.Domain.Models.Organizations;
+using Documentmanager.Core.Domain.Models.Users;
 using Documentmanager.Core.Domain.Repositories.Interfaces;
 using Documentmanager.Core.Domain.Repositories.Organizations;
 using Documentmanager.Core.Domain.Services.Organizations;
-using System.Reflection;
+using Documentmanager.Core.Domain.Services.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddAutoMapper(typeof(Organization));
+builder.Services.AddAutoMapper(typeof(Organization), typeof(User));
 
 // Use Autofac as the ServiceProvider
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -23,12 +23,10 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     // Register your services here
     containerBuilder.RegisterType<OrganizationRepository>().As<IRepository<Organization>>().InstancePerLifetimeScope();
     containerBuilder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>().InstancePerLifetimeScope();
+    containerBuilder.RegisterType<UserRepository>().As<IRepository<User>>().InstancePerLifetimeScope();
+    containerBuilder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerLifetimeScope();
     containerBuilder.RegisterType<OrganizationService>().InstancePerLifetimeScope();
-
-
-    // You can also register entire assemblies
-    // containerBuilder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-    //     .AsImplementedInterfaces();
+    containerBuilder.RegisterType<UserService>().InstancePerLifetimeScope();
 });
 
 var app = builder.Build();
