@@ -53,7 +53,7 @@ namespace Documentmanager.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> CreateDocument([FromBody] CreateDocumentDto request, [FromHeader(Name = "X-User-Id")] int userId)
+        public async Task<ActionResult<int>> CreateDocument([FromForm] CreateDocumentDto request, [FromHeader(Name = "X-User-Id")] int userId)
         {
             if (userId == default(int))
             {
@@ -71,7 +71,7 @@ namespace Documentmanager.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<int>> UpdateDocument([FromBody] UpdateDocumentDto request, [FromHeader(Name = "X-User-Id")] int userId)
+        public async Task<ActionResult<int>> UpdateDocument([FromForm] UpdateDocumentDto request, [FromHeader(Name = "X-User-Id")] int userId)
         {
             if (userId == default(int))
             {
