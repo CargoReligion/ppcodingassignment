@@ -4,6 +4,7 @@ using Documentmanager.Core.Domain.Models.Common;
 using Documentmanager.Core.Domain.Models.Document;
 using Documentmanager.Core.Domain.Repositories.Interfaces;
 using Documentmanager.Core.Domain.Services.Common;
+using Microsoft.Extensions.Logging;
 
 namespace Documentmanager.Core.Domain.Services.Documents
 {
@@ -13,13 +14,15 @@ namespace Documentmanager.Core.Domain.Services.Documents
         private readonly IDocumentRepository _repository;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<DocumentService> _logger;
 
-        public DocumentService(IFileService fileService, IDocumentRepository repository, IUserRepository userRepository, IMapper mapper)
+        public DocumentService(IFileService fileService, IDocumentRepository repository, IUserRepository userRepository, IMapper mapper, ILogger<DocumentService> logger)
         {
             _fileService = fileService;
             _repository = repository;
             _userRepository = userRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<Result<GetDocumentDto>> FindById(int id, int userId)
@@ -71,6 +74,7 @@ namespace Documentmanager.Core.Domain.Services.Documents
             var storagePath = await _fileService.UploadFile(dto.File);
             var document = new Document(dto.Name, storagePath, existingUser.Id, existingUser.OrganizationId);
             var createdId = await _repository.Create(document);
+            _logger.LogInformation($"User {document.CreatedBy} created Document with Id {createdId} and Name {document.Name} at {document.DateCreated}");
             result.AddSuccessData(createdId);
             return result;
         }
@@ -93,6 +97,7 @@ namespace Documentmanager.Core.Domain.Services.Documents
             var storagePath = await _fileService.UploadFile(dto.File);
             existingDocument.Update(dto.Name, storagePath, existingUser.Id, existingUser.OrganizationId);
             var updatedId = await _repository.Update(existingDocument);
+            _logger.LogInformation($"User {existingDocument.ModifiedBy} updated Document with Id {updatedId} and Name {existingDocument.Name} at {existingDocument.DateModified}");
             result.AddSuccessData(updatedId);
             return result;
         }
@@ -114,6 +119,7 @@ namespace Documentmanager.Core.Domain.Services.Documents
             }
             await _fileService.DeleteFile(existingDocument.StoragePath);
             await _repository.Delete(existingDocument);
+            _logger.LogInformation($"User {existingUser.Id} deleted Document with Id {existingDocument.Id} and Name {existingDocument.Name} at {DateTime.UtcNow}");
             return result;
         }
     }

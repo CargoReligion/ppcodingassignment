@@ -22,6 +22,10 @@ builder.Services.AddAutoMapper(typeof(Organization), typeof(User), typeof(Docume
 // Use Autofac as the ServiceProvider
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
 // Register services directly with Autofac here
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
