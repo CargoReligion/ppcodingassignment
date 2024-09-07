@@ -5,6 +5,7 @@ using Documentmanager.Core.Domain.Models.Users;
 using Documentmanager.Core.Domain.Repositories.Interfaces;
 using Documentmanager.Core.Domain.Repositories.Organizations;
 using Documentmanager.Core.Domain.Services.Organizations;
+using Documentmanager.Core.Domain.Services.OrganizationUser;
 using Documentmanager.Core.Domain.Services.Users;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     containerBuilder.RegisterType<UserRepository>().As<IRepository<User>>().InstancePerLifetimeScope();
     containerBuilder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerLifetimeScope();
     containerBuilder.RegisterType<OrganizationService>().InstancePerLifetimeScope();
+    containerBuilder.RegisterType<OrganizationUserService>().InstancePerLifetimeScope(); 
     containerBuilder.RegisterType<UserService>().InstancePerLifetimeScope();
 });
 
