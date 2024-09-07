@@ -1,17 +1,11 @@
-﻿using Documentmanager.Core.Domain.Models.Organizations;
-using Documentmanager.Core.Domain.Repositories.Interfaces;
+﻿using Documentmanager.Core.Domain.Repositories.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using Dapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Documentmanager.Core.Domain.Repositories.Common;
 using Documentmanager.Core.Domain.Models.Users;
 
-namespace Documentmanager.Core.Domain.Repositories.Organizations
+namespace Documentmanager.Core.Domain.Repositories.Users
 {
     public class UserRepository : IUserRepository
     {

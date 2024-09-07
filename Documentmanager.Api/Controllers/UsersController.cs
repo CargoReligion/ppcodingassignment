@@ -8,13 +8,13 @@ namespace Documentmanager.Api.Controllers
 {
     [ApiController]
     [Route("v1/admin/[controller]")]
-    public class UserController : CommonController
+    public class UsersController : CommonController
     {
         private readonly UserService _service;
 
-        private readonly ILogger<UserController> _logger;
+        private readonly ILogger<UsersController> _logger;
 
-        public UserController(UserService service, ILogger<UserController> logger)
+        public UsersController(UserService service, ILogger<UsersController> logger)
         {
             _service = service;
             _logger = logger;
