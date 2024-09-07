@@ -119,6 +119,7 @@ namespace Documentmanager.Core.Domain.Services.Documents
             }
             await _fileService.DeleteFile(existingDocument.StoragePath);
             await _repository.Delete(existingDocument);
+            result.AddSuccessData(existingDocument.Id);
             _logger.LogInformation($"User {existingUser.Id} deleted Document with Id {existingDocument.Id} and Name {existingDocument.Name} at {DateTime.UtcNow}");
             return result;
         }
