@@ -23,9 +23,11 @@ namespace Documentmanager.Core.Domain.Models.Organizations
         public DateTime DateCreated { get; private set; }
         public DateTime DateModified { get; private set; }  
 
-        public void UpdateName(UpdateOrganizationDto dto)
+        public void UpdateName(UpdateOrganizationDto dto, int userId)
         {
-            Name=dto.Name;
+            Name = dto.Name;
+            ModifiedBy = userId;
+            DateModified = DateTime.UtcNow;
         }
     }
 }

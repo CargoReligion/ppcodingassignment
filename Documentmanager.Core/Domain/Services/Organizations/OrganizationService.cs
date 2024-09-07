@@ -37,7 +37,7 @@ namespace Documentmanager.Core.Domain.Services.Organizations
             return result;
         }
 
-        public async Task<Result<IEnumerable<GetOrganizationDto>>> GetAll()
+        public async Task<Result<IEnumerable<GetOrganizationDto>>> GetAllOrganizations()
         {
             var result = new Result<IEnumerable<GetOrganizationDto>>();
             var organizations = await _repository.GetAll();
@@ -80,7 +80,7 @@ namespace Documentmanager.Core.Domain.Services.Organizations
                     result.AddError($"Organization with id {dto.Id} not found.");
                     return result;
                 }
-                existingOrganization.UpdateName(dto);
+                existingOrganization.UpdateName(dto, userId);
                 var updatedId = await _repository.Update(existingOrganization);
                 result.AddSuccessData(updatedId);
             }

@@ -1,8 +1,5 @@
 using Documentmanager.Api.Controllers.Common;
-using Documentmanager.Core.Domain.Dtos;
-using Documentmanager.Core.Domain.Dtos.Organizations;
 using Documentmanager.Core.Domain.Dtos.Users;
-using Documentmanager.Core.Domain.Services.Organizations;
 using Documentmanager.Core.Domain.Services.Users;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,14 +31,14 @@ namespace Documentmanager.Api.Controllers
             return result.IsSuccess ? OkFromResult(result) : BadRequestFromResult(result);
         }
 
-        [HttpGet("getall")]
-        public async Task<ActionResult<IEnumerable<GetUserDto>>> GetAll()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<GetUserDto>>> GetAllUsers()
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var result = await _service.GetAll();
+            var result = await _service.GetAllUsers();
             return result.IsSuccess ? OkFromResult(result) : BadRequestFromResult(result);
         }
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Documentmanager.Core.Domain.Dtos.Organizations;
 using Documentmanager.Core.Domain.Dtos.Users;
 using Documentmanager.Core.Domain.Models.Common;
 using Documentmanager.Core.Domain.Models.Users;
@@ -31,7 +32,7 @@ namespace Documentmanager.Core.Domain.Services.Users
             return result;
         }
 
-        public async Task<Result<IEnumerable<GetUserDto>>> GetAll()
+        public async Task<Result<IEnumerable<GetUserDto>>> GetAllUsers()
         {
             var result = new Result<IEnumerable<GetUserDto>>();
             var users = await _repository.GetAll();
@@ -74,7 +75,7 @@ namespace Documentmanager.Core.Domain.Services.Users
                     result.AddError($"User with id {dto.Id} not found.");
                     return result;
                 }
-                existingUser.UpdateEmail(dto);
+                existingUser.UpdateEmail(dto, userId);
                 var updatedId = await _repository.Update(existingUser);
                 result.AddSuccessData(updatedId);
             }

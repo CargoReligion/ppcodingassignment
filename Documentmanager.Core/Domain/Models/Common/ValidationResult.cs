@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Documentmanager.Core.Domain.Models.Common
 {
-    public class Result<T>
+    public class ValidationResult
     {
-        public Result() { }
+        public ValidationResult() { }
 
-        public T SuccessData { get; set; }
         public IEnumerable<string> Errors { get; set; } = new List<string>();
         public bool IsSuccess => !Errors.Any();
 
@@ -21,13 +20,11 @@ namespace Documentmanager.Core.Domain.Models.Common
             Errors = castToList;
         }
 
-        public void AddSuccessData(T t)
+        public void AddRangeOfErrors(IEnumerable<string> errors)
         {
-            if (Errors.Any())
-            {
-                throw new Exception("Cannot add success data with errors.");
-            }
-            SuccessData = t;
+            var errorsTemp = Errors.ToList();
+            errorsTemp.AddRange(errors);
+            Errors = errorsTemp;
         }
     }
 }

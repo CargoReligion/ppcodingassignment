@@ -9,6 +9,7 @@ namespace Documentmanager.Core.Domain.Dtos.Users
     public class GetUserDto
     {
         public int Id { get; set; }
+        public int? OrganizationId { get; set; }
         public string Email { get; set; }
     }
 }

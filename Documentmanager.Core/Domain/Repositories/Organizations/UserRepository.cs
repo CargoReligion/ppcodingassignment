@@ -53,7 +53,7 @@ namespace Documentmanager.Core.Domain.Repositories.Organizations
         public async Task<int> Update(User user)
         {
             using var connection = new NpgsqlConnection(_connectionString);
-            var sql = "UPDATE dsuser SET email = @Email, created_by = @CreatedBy, date_created = @DateCreated, date_modified = @DateModified, modified_by = @ModifiedBy WHERE id = @Id RETURNING Id";
+            var sql = "UPDATE dsuser SET email = @Email, organization_id = @OrganizationId, created_by = @CreatedBy, date_created = @DateCreated, date_modified = @DateModified, modified_by = @ModifiedBy WHERE id = @Id RETURNING Id";
             return await connection.ExecuteScalarAsync<int>(sql, user);
         }
 
