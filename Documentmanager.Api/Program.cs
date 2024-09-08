@@ -11,6 +11,7 @@ using Documentmanager.Core.Domain.Services.Documents;
 using Documentmanager.Core.Domain.Services.Organizations;
 using Documentmanager.Core.Domain.Services.OrganizationUser;
 using Documentmanager.Core.Domain.Services.Users;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
