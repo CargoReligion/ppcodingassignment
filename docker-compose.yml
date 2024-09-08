@@ -15,6 +15,7 @@ services:
         - ENLIST=true
         - DB_USERNAME=postgres
         - DB_PASSWORD=admin
+        - ASPNETCORE_ENVIRONMENT=Development
   db:
     image: postgres:14.4
     ports:

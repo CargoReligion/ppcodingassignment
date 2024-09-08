@@ -26,6 +26,13 @@ Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
+// Configure Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+});
+
 // Register services directly with Autofac here
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
