@@ -34,6 +34,11 @@ services:
       - .:/dbscripts
     depends_on:
       - db
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
   
   adminer:
     image: adminer
