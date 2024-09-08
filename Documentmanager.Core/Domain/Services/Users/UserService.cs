@@ -47,7 +47,7 @@ namespace Documentmanager.Core.Domain.Services.Users
             var existingUser = await _repository.GetByEmail(dto.Email);
             if (existingUser != null)
             {
-                result.AddError($"User with name {dto.Email} already exists.");
+                result.AddError($"User with email {dto.Email} already exists.");
             }
             else
             {
